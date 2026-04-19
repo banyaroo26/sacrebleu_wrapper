@@ -2,11 +2,17 @@ import tqdm
 import sacrebleu
 
 class Evaluator():
-    def __init__(self, translate_func=None, source=[], translations=[], references=[]):
+    def __init__(self, translate_func=None, source=[], translations=[], references=[], scorers={}):
         self.translate_func = translate_func
         self.source = source             # source sentences
         self.translations = translations # translated sentences
         self.references = references     # reference sentences
+        self.scorers = {
+            'bleu': sacrebleu.BLEU(tokenize='intl'),
+            'chrf': sacrebleu.CHRF(),
+            'chrfpp': sacrebleu.CHRF(word_order=2),
+            'ter': sacrebleu.TER()
+        }        
 
     def translate(self, source: list[str], target: list[str]) -> dict[list[str], list[str], list[str]]:
         self.source = source
@@ -23,16 +29,7 @@ class Evaluator():
             'references': self.references
         }
     
-    def evaluate(self, metric: str, **kwargs):
-        metric = metric.lower()
-
-        if metric == "bleu":
-            scorer = sacrebleu.BLEU(**kwargs)
-        elif metric == "chrf":
-            scorer = sacrebleu.CHRF(**kwargs)
-        elif metric == "ter":
-            scorer = sacrebleu.TER(**kwargs)
-        else:
-            raise ValueError("invalid")
-
+    def evaluate(self, scorer):
+        if scorer is None:
+            raise ValueError("Scorer is not defined.")
         return scorer.corpus_score(self.translations, self.references)

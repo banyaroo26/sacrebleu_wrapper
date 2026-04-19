@@ -45,13 +45,13 @@ smooth_value:
     float value used with smoothing methods
 
 lowercase:
-    True / False (ignore case)
+    True / False (case-insensitive, default)
 
 use_effective_order:
-    True / False (adjust n-gram order)
+    True / False (use available n-gram order, default)
 
 force:
-    True / False (force tokenization)
+    True / False (force tokenization even if it looks tokenized, default)
 
 ------------------------------------------------------------
 CHRF PARAMETERS
@@ -68,26 +68,26 @@ beta:
     float (default 2) → recall weighting
 
 lowercase:
-    True / False
+    True / False (default False)
 
 whitespace:
     True / False (default False)
-    include spaces in character n-grams
+    consider spaces in character n-grams
 
 ------------------------------------------------------------
 TER PARAMETERS
 ------------------------------------------------------------
 normalized:
-    True / False (normalize text)
+    True / False (normalize text such as clean up spacing / formatting inconsistencies, default)
 
 no_punct:
-    True / False (remove punctuation)
+    True / False (remove punctuation, default)
 
 asian_support:
-    True / False (special handling for Asian languages)
+    True / False (special handling for Asian languages, default)
 
 case_sensitive:
-    True / False
+    True / False (default)
 
 ------------------------------------------------------------
 KEY NOTES
