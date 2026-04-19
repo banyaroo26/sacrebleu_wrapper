@@ -18,10 +18,13 @@ class Evaluator():
         self.source = source
         refs = []
 
+        if len(source) != len(target):
+            raise ValueError("Source and target lists must have the same length.")
+
         for src, ref in tqdm(zip(source, target), total=len(source)):
             self.translations.append(self.translate_func(src))
             refs.append(ref)
-        self.references.append([refs]) # sacrebleu requires list of list of references
+        self.references.append(refs) # sacrebleu requires list of list of references
 
         return {
             'source': self.source,
