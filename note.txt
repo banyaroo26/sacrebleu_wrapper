@@ -1,0 +1,103 @@
+EVALUATION PARAMETERS (sacrebleu)
+
+Library: sacrebleu (machine translation evaluation)
+
+------------------------------------------------------------
+METRICS
+------------------------------------------------------------
+bleu  : BLEU score (word n-gram overlap)
+chrf  : character n-gram F-score (ChrF / ChrF++)
+ter   : translation edit rate (edit distance based)
+
+------------------------------------------------------------
+COMMON INPUT FORMAT
+------------------------------------------------------------
+preds (sys_stream):
+    list of translated sentences (strings)
+
+refs (ref_streams):
+    list of reference sets:
+    [
+        [ref_sentence1, ref_sentence2, ...]
+    ]
+
+------------------------------------------------------------
+BLEU PARAMETERS
+------------------------------------------------------------
+tokenize:
+    how text is split into tokens
+    values:
+        "13a"      (default, WMT standard)
+        "intl"     (international)
+        "zh"       (Chinese)
+        "ja-mecab" (Japanese)
+        "none"     (no tokenization)
+
+smooth_method:
+    smoothing for BLEU score
+    values:
+        "exp"      (default)
+        "floor"
+        "add-k"
+        "none"
+
+smooth_value:
+    float value used with smoothing methods
+
+lowercase:
+    True / False (ignore case)
+
+use_effective_order:
+    True / False (adjust n-gram order)
+
+force:
+    True / False (force tokenization)
+
+------------------------------------------------------------
+CHRF PARAMETERS
+------------------------------------------------------------
+char_order:
+    int (default 6) → character n-gram size
+
+word_order:
+    int:
+        0 = standard ChrF
+        2 = ChrF++
+
+beta:
+    float (default 2) → recall weighting
+
+lowercase:
+    True / False
+
+whitespace:
+    True / False (default False)
+    include spaces in character n-grams
+
+------------------------------------------------------------
+TER PARAMETERS
+------------------------------------------------------------
+normalized:
+    True / False (normalize text)
+
+no_punct:
+    True / False (remove punctuation)
+
+asian_support:
+    True / False (special handling for Asian languages)
+
+case_sensitive:
+    True / False
+
+------------------------------------------------------------
+KEY NOTES
+------------------------------------------------------------
+- BLEU = word-level similarity
+- CHRF = character-level similarity (more robust for morphology)
+- TER  = edit distance (lower is better)
+
+- corpus_* metrics are for full dataset evaluation (standard)
+- sentence_* metrics are for debugging only
+
+- references MUST be:
+    [[ref1, ref2, ref3, ...]]
