@@ -49,5 +49,5 @@ class Evaluator():
         for index, (translation, reference) in enumerate(zip(self.translations, self.references[0])):
             print(f"Source: {self.source[index]}")
             print(f"Translation: {translation}")
-            print(f"Reference: {reference}\n")
+            print(f"Reference: {reference}")
             print('\n')
